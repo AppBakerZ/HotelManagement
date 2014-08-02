@@ -17,15 +17,20 @@ define([
 
         className: 'header',
 
-        events: {},
+        events: {
+            'click #logout': 'logOut'
+        },
 
         initialize: function () {
-            //this.listenTo(this.model, 'change', this.render);
         },
 
         render: function () {
             this.$el.html(this.template({name: 'Sumair'}));
             return this;
+        },
+        logOut: function(e) {
+            Parse.User.logOut();
+            Parse.history.navigate('login',{trigger: true});
         }
     });
 

@@ -82,6 +82,10 @@ require([
 
         var _self = this;
 
+        // Initialize Parse with your Parse application javascript keys
+        Parse.initialize("QfAqdZm7swpSH19J9klyywk1cBsdvqwEXG5aiFUp",
+            "flVB9vS8wH75yNlPW7Mc06qKdH54NVaTd85Z6K6a");
+
         // Router module
         this.Router = new Router({Bus: this.Bus});
 
@@ -96,7 +100,7 @@ require([
     // Application bootstraping
     function bootstrap(application){
 
-        //Parse.History.start();
+        Parse.history.start();
         //Parse.history.start({ pushState: true, root:"/"});
 
         // Use absolute URLs  to navigate to anything not in your Router.

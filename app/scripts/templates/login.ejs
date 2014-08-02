@@ -4,7 +4,7 @@
             <div class="field">
                 <label>Username</label>
                 <div class="ui left labeled icon input">
-                    <input type="text" placeholder="Username">
+                    <input type="text" placeholder="Username" id="login-username">
                     <i class="user icon"></i>
                     <div class="ui corner label">
                         <i class="asterisk icon"></i>
@@ -14,23 +14,25 @@
             <div class="field">
                 <label>Password</label>
                 <div class="ui left labeled icon input">
-                    <input type="password">
+                    <input type="password" id="login-password">
                     <i class="lock icon"></i>
                     <div class="ui corner label">
                         <i class="asterisk icon"></i>
                     </div>
                 </div>
             </div>
-            <div class="ui blue submit button">Login</div>
+            <div class="ui blue submit button" id="login">Login</div>
         </div>
     </div>
     <div class="ui vertical divider">
         Or
     </div>
     <div class="center aligned column">
+        <a href="#/signup">
         <div class="huge green ui labeled icon button">
             <i class="signup icon"></i>
             Sign Up
         </div>
+        </a>
     </div>
 </div>
