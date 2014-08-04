@@ -4,8 +4,9 @@ define([
     'jquery',
     'underscore',
     'parse',
-    'templates'
-], function ($, _, Parse, JST) {
+    'templates',
+    'views/order'
+], function ($, _, Parse, JST, OrderView) {
     'use strict';
 
     var HomeView = Parse.View.extend({
@@ -23,10 +24,17 @@ define([
 
         initialize: function () {
             this.collection.on('reset', this.render, this);
+            this.collection.on('add', this.addOne, this);
         },
-
+        addOne: function(model){
+            var list = new OrderView({model: model});
+            this.$('.list').append(list.render().el);
+        },
         render: function () {
-            this.$el.html(this.template({collection: this.collection}) );
+            this.$el.html(this.template() );
+            this.collection.each(function(model){
+                this.addOne(model);
+            }, this);
             return this;
         },
         // If you hit return in the main input field, create new Order model
@@ -41,7 +49,7 @@ define([
                 user: Parse.User.current(),
                 ACL: new Parse.ACL(Parse.User.current())
             });
-            this.input.val('');
+            this.$("#new-order").val('');
         }
     });
 
