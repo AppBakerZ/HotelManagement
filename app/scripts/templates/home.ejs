@@ -1,22 +1,28 @@
 <div class="ui attached message">
     <h2 class="ui header">Hotel Services
         <label class="ui black label pull-right order-link">
-            Item Left
+            <%= remaining.length %> <%= remaining.length > 1 ? 'items' : 'Item' %> Left
         </label>
     </h2>
 </div>
 <div class="ui attached segment">
     <div class="ui animated selection divided list">
         <div class="item">
-            <div class="field fix-checkbox-position">
-                <div class="ui toggle checkbox">
-                    <input id="0" type="checkbox">
-                    <label for="0"></label>
+            <div class="row">
+                <div class="col-xs-1">
+                    <div class="field fix-checkbox-position">
+                        <div class="ui toggle checkbox">
+                            <input id="one" type="checkbox">
+                            <label for="one"></label>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="content">
-                <div class="ui fluid icon input">
-                    <input type="text" placeholder="Place your order" id="new-order">
+                <div class="col-xs-11">
+                    <div class="content">
+                        <div class="ui fluid icon input">
+                            <input type="text" placeholder="Place your order" id="new-order">
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -33,6 +39,6 @@
         Completed
     </a>
     <a class="ui teal label pull-right order-link">
-        Clear Completed()
+        Clear Completed (<%= done.length %>)
     </a>
 </div>

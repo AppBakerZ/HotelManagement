@@ -31,7 +31,10 @@ define([
             this.$('.list').append(list.render().el);
         },
         render: function () {
-            this.$el.html(this.template() );
+            this.$el.html(this.template({
+                remaining: this.collection.remaining(),
+                done: this.collection.done()
+            }) );
             this.collection.each(function(model){
                 this.addOne(model);
             }, this);
@@ -45,10 +48,11 @@ define([
             this.collection.create({
                 title: this.$("#new-order").val(),
                 message:'i am user',
+                done: $('#one').is(':checked'),
                 sender: 'NZLH82hRuZ',
                 user: Parse.User.current(),
                 ACL: new Parse.ACL(Parse.User.current())
-            });
+            }, {wait: true});
             this.$("#new-order").val('');
         }
     });

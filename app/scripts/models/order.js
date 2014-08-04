@@ -8,11 +8,11 @@ define([
     var OrderModel = Parse.Object.extend('Orders', {
         initialize: function() {
         },
-
         defaults: {
             title: '',
             message:'',
-            sender: ''
+            sender: '',
+            done: false
         }
     });
 

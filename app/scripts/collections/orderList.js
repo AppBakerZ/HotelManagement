@@ -9,9 +9,16 @@ define([
 
     var OrderList = Parse.Collection.extend({
         model: OrderModel,
-
         initialize: function () {
             this.fetch();
+        },
+        // Filter down the list of all todo items that are finished.
+        done: function() {
+            return this.filter(function(todo){ return todo.get('done'); });
+        },
+        // Filter down the list to only todo items that are still not finished.
+        remaining: function() {
+            return this.without.apply(this, this.done());
         }
     });
 
