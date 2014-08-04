@@ -21,16 +21,21 @@ define([
             'click #logout': 'logOut'
         },
 
-        initialize: function () {
+        initialize: function (options) {
+            // Global Events
+            this.Bus = options.Bus;
+            this.Bus.on('login', this.render, this);
+            this.Bus.on('logout', this.render, this);
+
         },
 
         render: function () {
-            this.$el.html(this.template({name: 'Sumair'}));
+            this.$el.html(this.template({currentUser : Parse.User.current()}));
             return this;
         },
         logOut: function(e) {
             Parse.User.logOut();
-            Parse.history.navigate('login',{trigger: true});
+            this.Bus.trigger('logout');
         }
     });
 

@@ -3,29 +3,42 @@
 define([
     'jquery',
     'parse',
+    'routes/baseRouter',
     'views/home',
     'views/login',
     'views/signup'
-], function ($, Parse, HomeView, LoginView, SignupView) {
+], function ($, Parse, BaseRouter, HomeView, LoginView, SignupView) {
     'use strict';
 
-    var AppRouter = Parse.Router.extend({
+    var AppRouter = BaseRouter.extend({
         routes: {
             '' : "index",
             'login': "login",
             'signup': "signUp"
         },
+        initialize: function(options){
+            // Global Events
+            this.Bus = options.Bus;
+
+        },
+        showView: function(selector, view) {
+                if (this.currentView){
+                    this.currentView.close();
+                }
+                $(selector).html(view.render().el);
+                this.currentView = view;
+                return view;
+        },
         index: function(){
-            var homeView = new HomeView();
-            $('#content').html(homeView.render().el);
+                this.showView('#content', new HomeView())
         },
         login: function(){
-            var loginView = new LoginView();
-            $('#content').html(loginView.render().el);
+            this.showView('#content', new LoginView({
+                Bus: this.Bus
+            }));
         },
         signUp: function(){
-            var signUpView = new SignupView();
-            $('#content').html(signUpView.render().el);
+            this.showView('#content', new SignupView())
         }
 
     });

@@ -1,15 +1,50 @@
-<div class="ui form segment">
-     <div class="field">
-        <label>Username</label>
-        <input placeholder="Username" type="text" id="signup-username">
+<div class="ui one column middle aligned relaxed grid basic segment">
+    <div class="column">
+        <div class="ui form segment">
+            <div class="ui error message"></div>
+            <div class="ui inverted dimmer"><div class="ui large inverted text loader"></div></div>
+            <div class="field">
+                <label>Username</label>
+                <div class="ui left labeled icon input">
+                    <input placeholder="Username" type="text" id="signup-username">
+                    <i class="user icon"></i>
+                    <div class="ui corner label">
+                        <i class="asterisk icon"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="field">
+                <label>E-Mail</label>
+                <div class="ui left labeled icon input">
+                    <input placeholder="Email" type="text" id="signup-mail">
+                    <i class="mail icon"></i>
+                    <div class="ui corner label">
+                        <i class="asterisk icon"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="field">
+                <label>Password</label>
+                <div class="ui left labeled icon input">
+                    <input placeholder="" type="password" id="signup-password">
+                    <i class="lock icon"></i>
+                    <div class="ui corner label">
+                        <i class="asterisk icon"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="ui blue submit button" id="signup">Sign Up</div>
+        </div>
     </div>
-    <div class="field">
-        <label>E-Mail</label>
-        <input placeholder="Email" type="text" id="signup-mail">
+    <div class="ui horizontal divider">
+        Or
     </div>
-    <div class="field">
-        <label>Password</label>
-        <input type="password" id="signup-password">
+    <div class="center aligned column">
+        <a href="#login">
+            <div class="huge green ui labeled icon button">
+                <i class="unlock icon"></i>
+                Login
+            </div>
+        </a>
     </div>
-    <div class="ui blue submit button">Sign Up</div>
 </div>

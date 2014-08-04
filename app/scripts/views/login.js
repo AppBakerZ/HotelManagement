@@ -13,15 +13,18 @@ define([
 
         tagName: 'div',
 
-        id: '',
+        id: 'login-section',
 
-        className: '',
+        className: 'login-section',
 
         events: {
             'click #login': 'logIn'
         },
 
-        initialize: function () {
+        initialize: function (options) {
+            // Global Events
+            this.Bus = options.Bus;
+
         },
 
         render: function () {
@@ -35,19 +38,14 @@ define([
 
             Parse.User.logIn(username, password, {
                 success: function(user) {
-                    Parse.history.navigate('',{trigger: true});
-//                    new ManageTodosView();
-//                    self.undelegateEvents();
-//                    delete self;
+                    self.Bus.trigger('login');
+                    Parse.history.navigate('', {trigger: true});
                 },
-
                 error: function(user, error) {
-//                    self.$(".login-form .error").html("Invalid username or password. Please try again.").show();
-//                    self.$(".login-form button").removeAttr("disabled");
+                    self.$('.ui.error.message').parent().addClass('error').end()
+                        .text(error.message);
                 }
             });
-
-//            this.$(".login-form button").attr("disabled", "disabled");
 
             return false
         }

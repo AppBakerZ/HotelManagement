@@ -22,8 +22,13 @@ define([
 
         events: {},
 
-        initialize: function () {
-            this.addSubView(new HeaderView());
+        initialize: function (options) {
+            // Global Events
+            this.Bus = options.Bus;
+
+            this.addSubView(new HeaderView({
+                Bus : this.Bus
+            }));
             this.addSubView(new FooterView());
         },
 
