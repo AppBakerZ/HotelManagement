@@ -4,11 +4,10 @@ define([
     'jquery',
     'parse',
     'routes/baseRouter',
-    'lib/session',
     'views/home',
     'views/login',
     'views/signup'
-], function ($, Parse, BaseRouter, Session, HomeView, LoginView, SignupView) {
+], function ($, Parse, BaseRouter, HomeView, LoginView, SignupView) {
     'use strict';
 
     var AppRouter = BaseRouter.extend({
@@ -50,7 +49,7 @@ define([
                 //If user gets redirect to login because wanted to access
                 // to a route that requires login, save the path in session
                 // to redirect the user back to path after successful login
-                Session.set('redirectFrom', path);
+//                localStorage.setItem('redirectFrom', path);
                 Parse.history.navigate('login', { trigger : true });
             }else if(isAuth && cancelAccess){
                 //User is authenticated and tries to go to login, register ...
@@ -74,8 +73,7 @@ define([
         },
         login: function(){
             this.showView('#content', new LoginView({
-                Bus: this.Bus,
-                Session: Session
+                Bus: this.Bus
             }));
         },
         signUp: function(){
