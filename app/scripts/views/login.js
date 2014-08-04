@@ -24,7 +24,7 @@ define([
         initialize: function (options) {
             // Global Events
             this.Bus = options.Bus;
-
+            this.Session = options.Session;
         },
 
         render: function () {
