@@ -4,10 +4,11 @@ define([
     'jquery',
     'parse',
     'routes/baseRouter',
+    'collections/orderList',
     'views/home',
     'views/login',
     'views/signup'
-], function ($, Parse, BaseRouter, HomeView, LoginView, SignupView) {
+], function ($, Parse, BaseRouter, OrderList, HomeView, LoginView, SignupView) {
     'use strict';
 
     var AppRouter = BaseRouter.extend({
@@ -69,7 +70,9 @@ define([
                 return view;
         },
         index: function(){
-                this.showView('#content', new HomeView())
+                this.showView('#content', new HomeView({
+                    collection: new OrderList()
+                }))
         },
         login: function(){
             this.showView('#content', new LoginView({

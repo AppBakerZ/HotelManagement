@@ -110,7 +110,13 @@ module.exports = function (grunt) {
         },
         clean: {
             dist: ['.tmp', '<%= yeoman.dist %>/*'],
-            server: '.tmp'
+            server: {
+                src: '.tmp',
+                filter: function(filepath) {
+                    if (!grunt.file.isDir(filepath)) { return true; }
+                    return (fs.readdirSync(filepath).length === 0);
+                }
+            }
         },
         jshint: {
             options: {
