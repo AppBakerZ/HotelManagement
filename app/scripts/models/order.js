@@ -8,11 +8,11 @@ define([
     var OrderModel = Parse.Object.extend('Orders', {
         // Ensure that each order created has `content`.
         initialize: function() {
-            !this.get("message") && this.set({"content": this.defaults.message});
+            !this.get("title") && this.set({"title": this.defaults.title});
         },
         defaults: {
-            title: '',
-            message:'',
+            title: 'Empty order',
+            message: '',
             sender: '',
             done: false
         },
