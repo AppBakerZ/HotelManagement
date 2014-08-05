@@ -4,9 +4,12 @@ define([
     'jquery',
     'underscore',
     'parse',
-    'templates'
-], function ($, _, Parse, JST) {
+    'templates',
+    'collections/answerList'
+], function ($, _, Parse, JST, AnswerList) {
     'use strict';
+
+//    var answerList = AnswerList();
 
     var OrderView = Parse.View.extend({
         template: JST['app/scripts/templates/order.ejs'],
@@ -21,11 +24,16 @@ define([
             'click label': 'toggleDone',
             'dblclick  div.header': 'editField',
             "keypress .edit input[type='text']": "updateOnEnter",
-            "blur .edit input[type='text']": "close"
+            "blur .edit input[type='text']": "close",
+            "click .remove": "clear",
+            "click #save-msg": "customMessage"
         },
 
         initialize: function () {
-            this.model.on('change', this.render, this);
+            this.answers = new AnswerList();
+            this.model.on('change:title', this.render, this);
+            this.model.on('change:done', this.addStyleCheckbox, this);
+            this.model.on('destroy', this.remove, this);
         },
 
         toggleDone: function(){
@@ -49,6 +57,32 @@ define([
         // If you hit `enter`, we're through editing the item.
         updateOnEnter: function(e) {
             if (e.keyCode == 13) this.close();
+        },
+
+        // Remove the item, destroy the model.
+        clear: function() {
+            this.model.destroy();
+        },
+
+        customMessage: function(){
+            this.answers.create({
+                title: this.model.attributes.title,
+                message: this.$('.custom-msg').val(),
+                intendedUser: Parse.User.current()
+            });
+            this.$('.custom-msg').val('')
+        },
+
+        addStyleCheckbox: function(){
+            var $checkboxs = this.$('input[type="checkbox"]');
+            _.each($checkboxs,function(checkbox){
+                    if($(checkbox).is(':checked')){
+                        $(checkbox).parents('.item').removeClass('approved')
+                    }
+                    else{
+                        $(checkbox).parents('.item').addClass('approved')
+                    }
+            });
         },
 
         render: function () {

@@ -12,11 +12,11 @@ define([
         initialize: function () {
             this.fetch();
         },
-        // Filter down the list of all todo items that are finished.
+        // Filter down the list of all OrderModel items that are finished.
         done: function() {
             return this.filter(function(todo){ return todo.get('done'); });
         },
-        // Filter down the list to only todo items that are still not finished.
+        // Filter down the list to only OrderModel items that are still not finished.
         remaining: function() {
             return this.without.apply(this, this.done());
         }

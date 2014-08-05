@@ -18,7 +18,7 @@ define([
         },
         // Toggle the `done` state of this order item.
         toggle: function() {
-            this.save({done: !this.get("done")}, {wait: true});
+            this.save({done: !this.get("done")});
         }
     });
 
