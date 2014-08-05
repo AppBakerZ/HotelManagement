@@ -17,9 +17,15 @@ define([
 
         className: 'item',
 
-        events: {},
+        events: {
+            'click label': 'toggleDone'
+        },
 
         initialize: function () {
+        },
+
+        toggleDone: function(){
+            this.model.toggle();
         },
 
         render: function () {

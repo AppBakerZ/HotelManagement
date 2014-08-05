@@ -27,8 +27,10 @@ define([
             this.collection.on('add', this.addOne, this);
         },
         addOne: function(model){
-            var list = new OrderView({model: model});
-            this.$('.list').append(list.render().el);
+            this.addSubView(new OrderView({
+                model : model
+            }));
+            this.$('.list').append(this.subViews[this.subViews.length - 1].render().el);
         },
         render: function () {
             this.$el.html(this.template({
