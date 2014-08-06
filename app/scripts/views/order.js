@@ -30,15 +30,15 @@ define([
 
         // set message for approved order
         approvedOrder: function(){
-            var setMessage = 'Your request with ' + this.model.attributes.title + ' and with message '
-                + this.model.attributes.messages + ' was accepted.';
+            var setMessage = 'Your request with itle: "' + this.model.attributes.title + '"\r\n and with message '
+                + this.model.attributes.messages + '"\r\nwas accepted.';
             this.orderCompleted(setMessage);
         },
 
         // set message for declined order
         declinedOrder: function() {
-            var setMessage = 'Your request with ' + this.model.attributes.title + ' and with message '
-                + this.model.attributes.messages + ' was declined.';
+            var setMessage = 'Your request with title: "' + this.model.attributes.title + '"\r\nand with message: "'
+                + this.model.attributes.message + '"\r\nwas declined.';
             this.orderCompleted(setMessage);
         },
 
@@ -58,7 +58,7 @@ define([
                 return;
             this.$el.addClass('completed');
             this.answers.create({
-                title: title || this.model.attributes.title,
+                title: (title || this.model.attributes.title) + 'response' ,
                 messages: setMessage,
                 intendedUser: Parse.User.current().id
             }, {wait: true});
@@ -66,11 +66,12 @@ define([
         },
 
         render: function () {
+            this.$el.html(this.template(this.model.toJSON()));
             if(this.model.attributes.completed)
             {
+                this.$('.edit.icon.list-btn').removeAttr("data-target");
                 this.$el.addClass('completed')
             }
-            this.$el.html(this.template(this.model.toJSON()));
             return this;
         }
     });
