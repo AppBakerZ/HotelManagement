@@ -53,6 +53,7 @@ define([
 
         // complete the order and apply styling
         orderCompleted: function(setMessage, title){
+            this.$('.edit.icon.list-btn').removeAttr("data-target");
             if(this.$el.hasClass('completed'))
                 return;
             this.$el.addClass('completed');
