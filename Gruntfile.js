@@ -110,13 +110,14 @@ module.exports = function (grunt) {
         },
         clean: {
             dist: ['.tmp', '<%= yeoman.dist %>/*'],
-            server: {
-                src: '.tmp',
-                filter: function(filepath) {
-                    if (!grunt.file.isDir(filepath)) { return true; }
-                    return (fs.readdirSync(filepath).length === 0);
-                }
-            }
+            server: '.tmp' // for production
+//            server: {    // for dist
+//                src: '.tmp',
+//                filter: function(filepath) {
+//                    if (!grunt.file.isDir(filepath)) { return true; }
+//                    return (fs.readdirSync(filepath).length === 0);
+//                }
+//            }
         },
         jshint: {
             options: {
@@ -245,7 +246,8 @@ module.exports = function (grunt) {
                         '.htaccess',
                         'images/{,*/}*.{webp,gif}',
                         'styles/fonts/{,*/}*.*',
-                        'bower_components/sass-bootstrap/fonts/*.*'
+                        'bower_components/sass-bootstrap/fonts/*.*',
+                        'semantic-ui/{,*/}*.*'
                     ]
                 }]
             }
@@ -325,7 +327,7 @@ module.exports = function (grunt) {
                 'jst',
                 'compass',
                 'connect:test',
-                'mocha',
+                'mocha'
             ];
 
         if(!isConnected) {
