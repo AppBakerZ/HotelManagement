@@ -13,7 +13,7 @@ define([
         // set default value for order
         defaults: {
             title: '',
-            messages: '',
+            message: '',
             sender: '',
             completed: false
         },
