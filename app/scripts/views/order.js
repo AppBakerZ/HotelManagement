@@ -21,7 +21,7 @@ define([
         events: {
             'click .check': 'approvedOrder',
             "click .remove": "declinedOrder",
-            "click #save-msg": "customMessage"
+            "click .custom-msg-btn": "customMessage"
         },
 
         initialize: function () {
@@ -43,26 +43,30 @@ define([
         },
 
         // set custom message
-        customMessage: function(){
-            var setMessage = this.$('#new-title').val();
-            var title = this.$('#new-msg').val();
+        customMessage: function(e){
+            var setMessage = this.$('.new-msg').val();
+            var title = this.$('.new-title').val();
             this.orderCompleted(setMessage, title);
-            this.$('#new-title').val('');
-            this.$('#new-msg').val('')
         },
 
         // complete the order and apply styling
         orderCompleted: function(setMessage, title){
+            if(!title){
+                var setTitle = this.model.attributes.title + ' response'
+            }
             this.$('.edit.icon.list-btn').removeAttr("data-target");
             if(this.$el.hasClass('completed'))
                 return;
             this.$el.addClass('completed');
+
             this.answers.create({
-                title: (title || this.model.attributes.title) + 'response' ,
+                title: title || setTitle,
                 messages: setMessage,
                 intendedUser: Parse.User.current().id
             }, {wait: true});
             this.model.approved();
+            this.$('#new-title').val('');
+            this.$('#new-msg').val('')
         },
 
         render: function () {
