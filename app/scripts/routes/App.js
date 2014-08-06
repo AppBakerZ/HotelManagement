@@ -32,8 +32,7 @@ define([
         // Routes that should not be accessible if user is authenticated
         // for example, login, register, forgetpasword ...
         preventAccessWhenAuth : [
-            'login',
-            'signup'
+            'login'
         ],
 
         before : function(params, next){
