@@ -15,11 +15,13 @@ define([
         routes: {
             '' : "index",
             'login': "login",
-            'signup': "signUp"
+            'signup': "signUp",
+            'order/:state': "orderState"
         },
         initialize: function(options){
             // Global Events
             this.Bus = options.Bus;
+            this.orders = new OrderList();
 
         },
         // Routes that need authentication and if user is not authenticated
@@ -81,6 +83,13 @@ define([
         },
         signUp: function(){
             this.showView('#content', new SignupView())
+        },
+
+        orderState: function(state){
+            this.showView('#content', new HomeView({
+                collection: this.orders,
+                newState: state
+            }))
         }
 
     });

@@ -19,80 +19,84 @@ define([
         className: '',
 
         events: {
-            "keypress #new-order":  "createOnEnter",
-            "click #toggle-all": "checkAllOrderComplete"
+            'click #done': 'clearCompleted'
         },
 
-        initialize: function () {
+        initialize: function (options) {
+            this.state = options.newState;
             this.collection.on('reset', this.render, this);
             this.collection.on('add', this.addOne, this);
             this.collection.on('change', this.updateOrderCheck, this);
+            this.collection.on('remove', this.render, this);
         },
+
+        // adds all order to view
         addOne: function(model){
             this.addSubView(new OrderView({
                 model : model
             }));
             this.$('.list').append(this.subViews[this.subViews.length - 1].render().el);
         },
-        render: function () {
-            var done = this.collection.done().length;
-            var remaining = this.collection.remaining().length;
-            this.$el.html(this.template({
-                done:       done,
-                remaining:  remaining
-            }) );
+
+        // Only adds active order to view
+        addActive: function() {
             this.collection.each(function(model){
-                this.addOne(model);
+                if(!model.attributes.completed){
+                    this.addOne(model);
+                }
             }, this);
-            this.$("#toggle-all")[0].checked = !remaining;
-            this.addStyleCheckbox();
-            return this;
-
         },
-        // If you hit return in the main input field, create new Order model
-        createOnEnter: function(e) {
-            var self = this;
-            if (e.keyCode != 13) return;
 
-            this.collection.create({
-                title: this.$("#new-order").val(),
-                message:'i am user',
-                done: $('#one').is(':checked'),
-                sender: 'NZLH82hRuZ',
-                user: Parse.User.current(),
-                ACL: new Parse.ACL(Parse.User.current())
-            }, {wait: true});
-            this.$("#new-order").val('');
+        // Only adds completed order to view
+        addComplete: function() {
+            this.collection.each(function(model){
+                if(model.attributes.completed){
+                    this.addOne(model);
+                }
+            }, this);
         },
+
+        // delete all completed order form orders
+        clearCompleted: function(){
+            this.collection.each(function(model){
+                    if(model.attributes.completed) {
+                        model.destroy({wait: true})
+                    }
+            }, this);
+        },
+
+        // set values when order completed or declined
         updateOrderCheck: function(){
-            var done = this.collection.done().length;
+
+            var completed = this.collection.completed().length;
             var remaining = this.collection.remaining().length;
 
-            this.$('#done').html(' Clear Completed ('+ done +')');
+            this.$('#done').html(' Clear Completed ('+ completed +')');
             this.$('#remaining').html(remaining + (remaining > 1 ? ' items' : ' Item') + ' Left');
         },
-        checkAllOrderComplete: function(){
-            var done = this.$("#toggle-all")[0].checked;
-            this.collection.each(function (order) { order.save({'done': done}); });
-            var check = this.$('input[type="checkbox"]');
-            _.each(check,function(num){
-                num.checked = done;
-            });
-            this.addStyleCheckbox();
-        },
-        addStyleCheckbox: function(){
-            var $checkboxs = this.$('input[type="checkbox"]');
-            _.each($checkboxs,function(checkbox){
-                if(checkbox.id != 'toggle-all'){
-                    if($(checkbox).is(':checked')){
-                        $(checkbox).parents('.item').addClass('approved')
-                    }
-                    else{
-                        $(checkbox).parents('.item').removeClass('approved')
-                    }
-                }
-            });
+
+        render: function () {
+
+            var completed = this.collection.completed().length;
+            var remaining = this.collection.remaining().length;
+            this.$el.html(this.template({
+                completed: completed,
+                remaining: remaining
+            }));
+            if (this.state === "active") {
+                this.addActive();
+            } else if (this.state === "completed") {
+                this.addComplete();
+            }
+            else{
+                this.collection.each(function (model) {
+                    this.addOne(model);
+                }, this);
+            }
+
+            return this;
         }
+
     });
 
     return HomeView;

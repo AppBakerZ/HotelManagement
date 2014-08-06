@@ -1,21 +1,8 @@
 <i class="right floated inverted red circular remove icon list-btn"></i>
 <i class="right floated inverted green circular check icon list-btn"></i>
 <i class="right floated inverted teal circular edit icon list-btn" data-toggle="modal" data-target="#myModal"></i>
-<div class="field fix-checkbox-position">
-    <div class="ui toggle checkbox">
-        <input id="<%= objectId %>" <%= done ? 'checked' : '' %> type="checkbox">
-        <label for="<%= objectId %>"></label>
-    </div>
-</div>
 <div class="content">
     <div class="header"><%= title %></div>
-    <div class="col-xs-10 edit">
-        <div class="content">
-            <div class="ui fluid icon input">
-                <input type="text" placeholder="Place your order">
-            </div>
-        </div>
-    </div>
 </div>
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -26,7 +13,11 @@
                 <h4 class="modal-title" id="myModalLabel">Messages</h4>
             </div>
             <div class="modal-body">
-               <textarea class="custom-msg" placeholder="Right Message Here" autofocus="autofocus"></textarea>
+                        <div class="ui fluid icon input">
+                            <input type="text" placeholder="Right Title Here" id="new-title" autofocus="autofocus">
+                        </div>
+                <br />
+               <textarea id="new-msg" class="custom-msg" placeholder="Right Message Here"></textarea>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

@@ -15,9 +15,9 @@ define([
 
         defaults: {
             title: '',
-            message: '',
+            messages: '',
             intendedUser: '',
-            read: 'NO'
+            read: false
         }
 
     });

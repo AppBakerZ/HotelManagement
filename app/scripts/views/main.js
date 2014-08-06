@@ -5,9 +5,8 @@ define([
     'underscore',
     'parse',
     'views/header',
-    'views/footer',
     'templates'
-], function ($, _, Parse, HeaderView, FooterView, JST) {
+], function ($, _, Parse, HeaderView, JST) {
     'use strict';
 
     var MainView = Parse.View.extend({
@@ -29,11 +28,9 @@ define([
             this.addSubView(new HeaderView({
                 Bus : this.Bus
             }));
-            this.addSubView(new FooterView());
         },
 
         render: function (callback) {
-            this.$el.prepend(this.subViews[1].render().el);
             this.$el.prepend(this.template());
             this.$el.prepend(this.subViews[0].render().el);
             callback && callback();

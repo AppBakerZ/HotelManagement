@@ -7,38 +7,20 @@
 </div>
 <div class="ui attached segment">
     <div class="ui animated selection divided list">
-        <div class="item">
-            <div class="row">
-                <div class="col-xs-1">
-                    <div class="field fix-checkbox-position">
-                        <div class="ui toggle checkbox">
-                            <input id="toggle-all" type="checkbox">
-                            <label for="toggle-all"></label>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xs-11">
-                    <div class="content">
-                        <div class="ui fluid icon input">
-                            <input type="text" placeholder="Place your order" id="new-order">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+
     </div>
 </div>
-<div class="ui bottom attached info message">
-    <a class="ui green label order-link" id="all">
+<div class="ui bottom attached info message" id="filters">
+    <a class="ui green label order-link" id="all" href="#order/all">
         All
     </a>
-    <a class="ui red label order-link" id="active">
+    <a class="ui red label order-link" id="active" href="#order/active">
         Active
     </a>
-    <a class="ui blue label order-link" id="completed">
+    <a class="ui blue label order-link" id="completed" href="#order/completed">
         Completed
     </a>
     <a id="done" class="ui teal label pull-right order-link">
-        Clear Completed (<%= done %>)
+        Clear Completed (<%= completed %>)
     </a>
 </div>

@@ -10,15 +10,17 @@ define([
         initialize: function() {
             !this.get("title") && this.set({"title": this.defaults.title});
         },
+        // set default value for order
         defaults: {
-            title: 'Empty order',
-            message: '',
+            title: '',
+            messages: '',
             sender: '',
-            done: false
+            completed: false
         },
-        // Toggle the `done` state of this order item.
-        toggle: function() {
-            this.save({done: !this.get("done")});
+
+        // set completed order to true.
+        approved: function() {
+            this.save({completed: !this.get("completed")});
         }
     });
 

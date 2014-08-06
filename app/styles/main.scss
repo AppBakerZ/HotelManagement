@@ -45,26 +45,20 @@ i.inverted.icon.list-btn:hover{
   text-decoration: none !important;
   text-transform: capitalize !important;
 }
-div.item .content .edit{
-  display: none !important;
-}
-div.item .content .header{
-  cursor: auto;
-}
-div.item.editing .content .header{
-  display: none !important;
-}
 
-div.item.editing .content .edit{
-  display: block !important;
-}
 .custom-msg{
   border-radius: 5px;
   height: 200px;
   text-indent:5px;
   resize: none;
-  width: 530px;
+  width: 540px;
 }
-.approved{
+.completed{
   background-color: #DCF6BA ;
+}
+.item.completed i.right.floated.inverted.circular.icon.list-btn{
+  opacity: 0.3 !important;
+}
+.item.completed i.right.floated.inverted.circular.icon.list-btn:hover{
+  opacity: 0.3 !important;
 }
