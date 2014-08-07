@@ -1,11 +1,11 @@
 <i class="right floated inverted red circular remove icon list-btn"></i>
 <i class="right floated inverted green circular check icon list-btn"></i>
-<i class="right floated inverted teal circular edit icon list-btn" data-toggle="modal" data-target="#myModal"></i>
+<i id="mb" class="right floated inverted teal circular edit icon list-btn" data-toggle="modal" data-target="#myModal_<%=cid%>"></i>
 <div class="content">
     <div class="header"><%= title %></div>
 </div>
 <!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="myModal_<%=cid%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -13,15 +13,23 @@
                 <h4 class="modal-title" id="myModalLabel">Messages</h4>
             </div>
             <div class="modal-body">
+                <div class="ui error message hide">
+                    <p>Title or Message not must be empty.</p>
+                </div>
                         <div class="ui fluid icon input">
                             <input class="new-title" type="text" placeholder="Right Title Here" autofocus="autofocus">
                         </div>
                 <br />
-               <textarea class="custom-msg new-msg" placeholder="Right Message Here"></textarea>
+                <div class="ui form">
+                    <div class="field">
+                        <label>User Text</label>
+                        <textarea class="custom-msg new-msg" placeholder="Right Message Here"></textarea>
+                    </div>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary save-msg custom-msg-btn">Save Message</button>
+                <button type="button" class="btn btn-primary save-msg custom-msg-btn" data-dismiss="modal">Save Message</button>
             </div>
         </div>
     </div>

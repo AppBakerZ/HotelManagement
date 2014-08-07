@@ -28,9 +28,20 @@ define([
             this.answers = new AnswerList();
         },
 
+        render: function () {
+            var data = _.extend({cid : this.cid}, this.model.toJSON());
+            this.$el.html(this.template(data));
+            if(this.model.attributes.completed)
+            {
+                this.$('.edit.icon.list-btn').removeAttr("data-target");
+                this.$el.addClass('completed')
+            }
+            return this;
+        },
+
         // set message for approved order
         approvedOrder: function(){
-            var setMessage = 'Your request with itle: "' + this.model.attributes.title + '"\r\n and with message '
+            var setMessage = 'Your request with title: "' + this.model.attributes.title + '"\r\nand with message '
                 + this.model.attributes.messages + '"\r\nwas accepted.';
             this.orderCompleted(setMessage);
         },
@@ -43,10 +54,17 @@ define([
         },
 
         // set custom message
-        customMessage: function(e){
+        customMessage: function(){
+            this.$('.ui.error.message').removeClass('show').addClass('hide');
             var setMessage = this.$('.new-msg').val();
             var title = this.$('.new-title').val();
+            if(title == '' || setMessage == ''){
+                this.$('.ui.error.message').removeClass('hide').addClass('show');
+                return;
+            }
             this.orderCompleted(setMessage, title);
+            this.$('#new-title').val('');
+            this.$('#new-msg').val('')
         },
 
         // complete the order and apply styling
@@ -65,18 +83,6 @@ define([
                 intendedUser: Parse.User.current().id
             }, {wait: true});
             this.model.approved();
-            this.$('#new-title').val('');
-            this.$('#new-msg').val('')
-        },
-
-        render: function () {
-            this.$el.html(this.template(this.model.toJSON()));
-            if(this.model.attributes.completed)
-            {
-                this.$('.edit.icon.list-btn').removeAttr("data-target");
-                this.$el.addClass('completed')
-            }
-            return this;
         }
     });
 

@@ -62,3 +62,9 @@ i.inverted.icon.list-btn:hover{
 .item.completed i.right.floated.inverted.circular.icon.list-btn:hover{
   opacity: 0.3 !important;
 }
+.ui.error.message.hide{
+  display: none !important;
+}
+.ui.error.message.show{
+  display: block !important;
+}
