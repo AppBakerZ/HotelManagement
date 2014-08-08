@@ -1,10 +1,10 @@
 <i class="right floated inverted red circular remove icon list-btn"></i>
 <i class="right floated inverted green circular check icon list-btn"></i>
-<i id="mb" class="right floated inverted teal circular edit icon list-btn" data-toggle="modal" data-target="#myModal_<%=cid%>"></i>
-<div class="content">
+<i class="right floated inverted teal circular edit icon list-btn" data-toggle="modal" data-target="#myModal_<%=cid%>"></i>
+<div class="content" data-toggle="modal" data-target="#orderMessage_<%=cid%>">
     <div class="header"><%= title %></div>
 </div>
-<!-- Modal -->
+<!-- Custom Message Modal -->
 <div class="modal fade" id="myModal_<%=cid%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -34,3 +34,19 @@
         </div>
     </div>
 </div>
+
+<!-- Order Message Modal -->
+<div class="modal fade" id="orderMessage_<%=cid%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">Message</h4>
+            </div>
+            <div class="modal-body">
+                <%= message %>
+            </div>
+        </div>
+    </div>
+</div>
+
