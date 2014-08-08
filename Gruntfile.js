@@ -110,14 +110,14 @@ module.exports = function (grunt) {
         },
         clean: {
             dist: ['.tmp', '<%= yeoman.dist %>/*'],
-//            server: '.tmp' // for production
-            server: {    // for dist
-                src: '.tmp',
-                filter: function(filepath) {
-                    if (!grunt.file.isDir(filepath)) { return true; }
-                    return (fs.readdirSync(filepath).length === 0);
-                }
-            }
+            server: '.tmp' // for dist
+//            server: {    // for development
+//                src: '.tmp',
+//                filter: function(filepath) {
+//                    if (!grunt.file.isDir(filepath)) { return true; }
+//                    return (fs.readdirSync(filepath).length === 0);
+//                }
+//            }
         },
         jshint: {
             options: {
