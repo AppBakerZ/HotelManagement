@@ -80,7 +80,7 @@ define([
             this.answers.create({
                 title: title || setTitle,
                 messages: setMessage,
-                intendedUser: Parse.User.current().id
+                intendedUser: this.model.attributes.sender
             }, {wait: true});
             this.model.approved();
         }
