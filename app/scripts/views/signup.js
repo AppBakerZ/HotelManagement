@@ -18,7 +18,7 @@ define([
         className: '',
 
         events: {
-            'click #signup': 'signUp'
+            'submit #signup': 'signUp'
         },
 
         initialize: function (options) {
@@ -56,6 +56,7 @@ define([
                 }
             });
 
+            e.preventDefault();
         }
     });
 

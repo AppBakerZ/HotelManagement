@@ -18,7 +18,7 @@ define([
         className: 'login-section',
 
         events: {
-            'click #login': 'logIn'
+            'submit #login': 'logIn'
         },
 
         initialize: function (options) {
@@ -51,6 +51,7 @@ define([
                 }
             });
 
+            e.preventDefault();
             return false
         }
     });
