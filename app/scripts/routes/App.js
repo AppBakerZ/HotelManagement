@@ -81,7 +81,9 @@ define([
             }));
         },
         signUp: function(){
-            this.showView('#content', new SignupView())
+            this.showView('#content', new SignupView({
+                Bus: this.Bus
+            }))
         },
 
         orderState: function(state){

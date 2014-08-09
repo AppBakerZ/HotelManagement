@@ -26,6 +26,7 @@ define([
             this.Bus = options.Bus;
             this.Bus.on('login', this.render, this);
             this.Bus.on('logout', this.render, this);
+            this.Bus.on('signup', this.render, this);
 
         },
 

@@ -21,7 +21,9 @@ define([
             'click #signup': 'signUp'
         },
 
-        initialize: function () {
+        initialize: function (options) {
+            // Global Events
+            this.Bus = options.Bus;
         },
 
         render: function () {
@@ -44,6 +46,7 @@ define([
             user.signUp(null, {
                 success: function(user) {
                     self.unActiveLoader();
+                    self.Bus.trigger('signup');
                     Parse.history.navigate('', {trigger: true});
                 },
                 error: function(user, error) {
